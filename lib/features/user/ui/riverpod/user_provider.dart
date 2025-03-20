@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_template/features/user/data/datasources/user_remote_data_source.dart';
+import 'package:flutter_template/features/user/data/data_sources/user_remote_data_source.dart';
 import 'package:flutter_template/features/user/data/repositories/user_repo_impl.dart';
 import 'package:flutter_template/features/user/domain/repositories/user_repo.dart';
 import 'package:flutter_template/features/user/domain/usecases/get_users_usecase.dart';
-import 'package:flutter_template/features/user/ui/user/user_state.dart';
+import 'package:flutter_template/features/user/ui/riverpod/user_state.dart';
 
 // Remote Data Source Provider
 final userRemoteDataSourceProvider = Provider<UserRemoteDataSource>(

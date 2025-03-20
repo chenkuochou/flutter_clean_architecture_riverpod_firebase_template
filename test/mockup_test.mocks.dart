@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:flutter_template/features/user/data/datasources/user_remote_data_source.dart'
+import 'package:flutter_template/features/user/data/data_sources/user_remote_data_source.dart'
     as _i2;
 import 'package:flutter_template/features/user/data/models/user_model.dart'
     as _i4;

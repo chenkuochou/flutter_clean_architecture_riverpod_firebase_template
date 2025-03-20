@@ -1,4 +1,4 @@
-import 'package:flutter_template/features/user/data/datasources/user_remote_data_source.dart';
+import 'package:flutter_template/features/user/data/data_sources/user_remote_data_source.dart';
 import 'package:flutter_template/features/user/domain/entities/user.dart';
 import 'package:flutter_template/features/user/domain/repositories/user_repo.dart';
 

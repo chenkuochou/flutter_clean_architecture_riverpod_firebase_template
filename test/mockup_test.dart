@@ -1,5 +1,5 @@
 import 'package:flutter_template/features/user/data/repositories/user_repo_impl.dart';
-import 'package:flutter_template/features/user/data/datasources/user_remote_data_source.dart';
+import 'package:flutter_template/features/user/data/data_sources/user_remote_data_source.dart';
 import 'package:flutter_template/features/user/data/models/user_model.dart';
 import 'package:flutter_template/features/user/domain/entities/user.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -20,9 +20,9 @@ void main() {
     });
 
     final List<UserModel> sampleUsers = [
-      UserModel(id: '1', name: 'Test User 1'),
-      UserModel(id: '2', name: 'Test User 2'),
-      UserModel(id: '3', name: 'Test User 3'),
+      UserModel(id: 1, name: 'Test User 1', email: 'test@email.com'),
+      UserModel(id: 2, name: 'Test User 2', email: 'test@email.com'),
+      UserModel(id: 3, name: 'Test User 3', email: 'test@email.com'),
     ];
 
     test('fetchItems - returns list of users on successful call', () async {
@@ -74,7 +74,9 @@ void main() {
 
     test('fetchItems - returns a list with one user', () async {
       // Arrange
-      final user = [UserModel(id: '1', name: 'Test User')];
+      final user = [
+        UserModel(id: 1, name: 'Test User', email: 'test@email.com')
+      ];
       when(mockDataSource.getUsers()).thenAnswer((_) async => user);
 
       // Act
