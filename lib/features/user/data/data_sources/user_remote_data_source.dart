@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_template/core/exceptions.dart';
 import 'package:flutter_template/features/user/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
