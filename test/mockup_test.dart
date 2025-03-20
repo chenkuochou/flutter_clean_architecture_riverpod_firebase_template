@@ -1,22 +1,22 @@
-import 'package:flutter_template/features/user/data/repo_impl.dart';
-import 'package:flutter_template/features/user/data/user_data_source.dart';
-import 'package:flutter_template/features/user/data/user_model.dart';
-import 'package:flutter_template/features/user/domain/user.dart';
+import 'package:flutter_template/features/user/data/repositories/user_repo_impl.dart';
+import 'package:flutter_template/features/user/data/datasources/user_remote_data_source.dart';
+import 'package:flutter_template/features/user/data/models/user_model.dart';
+import 'package:flutter_template/features/user/domain/entities/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 
-@GenerateNiceMocks([MockSpec<UserDataSource>()])
+@GenerateNiceMocks([MockSpec<UserRemoteDataSource>()])
 import 'mockup_test.mocks.dart';
 
 void main() {
   group('ItemRepoImpl', () {
-    late ItemRepoImpl itemRepo;
+    late UserRepoImpl itemRepo;
     late MockUserDataSource mockDataSource;
 
     setUp(() {
       mockDataSource = MockUserDataSource();
-      itemRepo = ItemRepoImpl(mockDataSource);
+      itemRepo = UserRepoImpl(mockDataSource);
     });
 
     final List<UserModel> sampleUsers = [
@@ -27,10 +27,10 @@ void main() {
 
     test('fetchItems - returns list of users on successful call', () async {
       // Arrange
-      when(mockDataSource.fetchItems()).thenAnswer((_) async => sampleUsers);
+      when(mockDataSource.getUsers()).thenAnswer((_) async => sampleUsers);
 
       // Act
-      final result = await itemRepo.fetchItems();
+      final result = await itemRepo.getUsers();
 
       // Assert
       expect(result, isA<List<User>>());
@@ -41,50 +41,50 @@ void main() {
       expect(result[1].name, sampleUsers[1].name);
       expect(result[2].id, sampleUsers[2].id);
       expect(result[2].name, sampleUsers[2].name);
-      verify(mockDataSource.fetchItems()).called(1);
+      verify(mockDataSource.getUsers()).called(1);
       verifyNoMoreInteractions(mockDataSource);
     });
 
     test('fetchItems - throws exception on error', () async {
       // Arrange
-      when(mockDataSource.fetchItems()).thenThrow(Exception('Test error'));
+      when(mockDataSource.getUsers()).thenThrow(Exception('Test error'));
 
       // Act
-      final call = itemRepo.fetchItems;
+      final call = itemRepo.getUsers;
 
       // Assert
       expect(() => call(), throwsException);
-      verify(mockDataSource.fetchItems()).called(1);
+      verify(mockDataSource.getUsers()).called(1);
       verifyNoMoreInteractions(mockDataSource);
     });
 
     test('fetchItems - returns an empty list', () async {
       // Arrange
-      when(mockDataSource.fetchItems()).thenAnswer((_) async => []);
+      when(mockDataSource.getUsers()).thenAnswer((_) async => []);
 
       // Act
-      final result = await itemRepo.fetchItems();
+      final result = await itemRepo.getUsers();
 
       // Assert
       expect(result, isA<List<User>>());
       expect(result, isEmpty);
-      verify(mockDataSource.fetchItems()).called(1);
+      verify(mockDataSource.getUsers()).called(1);
       verifyNoMoreInteractions(mockDataSource);
     });
 
     test('fetchItems - returns a list with one user', () async {
       // Arrange
       final user = [UserModel(id: '1', name: 'Test User')];
-      when(mockDataSource.fetchItems()).thenAnswer((_) async => user);
+      when(mockDataSource.getUsers()).thenAnswer((_) async => user);
 
       // Act
-      final result = await itemRepo.fetchItems();
+      final result = await itemRepo.getUsers();
 
       // Assert
       expect(result, isA<List<User>>());
       expect(result.length, equals(1));
       expect(result.first.id, '1');
-      verify(mockDataSource.fetchItems()).called(1);
+      verify(mockDataSource.getUsers()).called(1);
       verifyNoMoreInteractions(mockDataSource);
     });
   });

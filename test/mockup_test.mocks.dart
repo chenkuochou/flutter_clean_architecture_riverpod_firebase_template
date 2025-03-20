@@ -5,9 +5,10 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:flutter_template/features/user/data/user_data_source.dart'
+import 'package:flutter_template/features/user/data/datasources/user_remote_data_source.dart'
     as _i2;
-import 'package:flutter_template/features/user/data/user_model.dart' as _i4;
+import 'package:flutter_template/features/user/data/models/user_model.dart'
+    as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -27,17 +28,15 @@ import 'package:mockito/mockito.dart' as _i1;
 /// A class which mocks [UserDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserDataSource extends _i1.Mock implements _i2.UserDataSource {
+class MockUserDataSource extends _i1.Mock implements _i2.UserRemoteDataSource {
   @override
-  _i3.Future<List<_i4.UserModel>> fetchItems() =>
-      (super.noSuchMethod(
-            Invocation.method(#fetchItems, []),
-            returnValue: _i3.Future<List<_i4.UserModel>>.value(
-              <_i4.UserModel>[],
-            ),
-            returnValueForMissingStub: _i3.Future<List<_i4.UserModel>>.value(
-              <_i4.UserModel>[],
-            ),
-          )
-          as _i3.Future<List<_i4.UserModel>>);
+  _i3.Future<List<_i4.UserModel>> getUsers() => (super.noSuchMethod(
+        Invocation.method(#fetchItems, []),
+        returnValue: _i3.Future<List<_i4.UserModel>>.value(
+          <_i4.UserModel>[],
+        ),
+        returnValueForMissingStub: _i3.Future<List<_i4.UserModel>>.value(
+          <_i4.UserModel>[],
+        ),
+      ) as _i3.Future<List<_i4.UserModel>>);
 }

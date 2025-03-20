@@ -1,4 +1,4 @@
-import 'package:flutter_template/features/user/domain/user.dart';
+import 'package:flutter_template/features/user/domain/entities/user.dart';
 
 class UserState {
   final bool isLoading;

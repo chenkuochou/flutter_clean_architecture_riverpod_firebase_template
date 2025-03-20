@@ -1,17 +1,17 @@
-import 'package:flutter_template/features/user/data/user_model.dart';
+import 'package:flutter_template/features/user/data/models/user_model.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_template/features/user/data/repo_impl.dart';
-import 'package:flutter_template/features/user/data/user_data_source.dart';
+import 'package:flutter_template/features/user/data/repositories/user_repo_impl.dart';
+import 'package:flutter_template/features/user/data/datasources/user_remote_data_source.dart';
 
 // Sample data for testing
-class TestUserDataSource implements UserDataSource {
+class TestUserDataSource implements UserRemoteDataSource {
   final List<UserModel> _users;
   final bool shouldThrowError;
 
   TestUserDataSource(this._users, {this.shouldThrowError = false});
 
   @override
-  Future<List<UserModel>> fetchItems() async {
+  Future<List<UserModel>> getUsers() async {
     if (shouldThrowError) {
       throw Exception('Test error');
     }
@@ -30,10 +30,10 @@ void main() {
     test('fetchItems - returns list of users on successful call', () async {
       // Arrange
       final dataSource = TestUserDataSource(sampleUsers);
-      final itemRepo = ItemRepoImpl(dataSource);
+      final itemRepo = UserRepoImpl(dataSource);
 
       // Act
-      final result = await itemRepo.fetchItems();
+      final result = await itemRepo.getUsers();
 
       // Assert
       expect(result, equals(sampleUsers));
@@ -42,10 +42,10 @@ void main() {
     test('fetchItems - throws exception on error', () async {
       // Arrange
       final dataSource = TestUserDataSource([], shouldThrowError: true);
-      final itemRepo = ItemRepoImpl(dataSource);
+      final itemRepo = UserRepoImpl(dataSource);
 
       // Act
-      final call = itemRepo.fetchItems;
+      final call = itemRepo.getUsers;
 
       // Assert
       expect(() => call(), throwsException);
@@ -53,10 +53,10 @@ void main() {
     test('fetchItems - returns an empty list', () async {
       // Arrange
       final dataSource = TestUserDataSource([]);
-      final itemRepo = ItemRepoImpl(dataSource);
+      final itemRepo = UserRepoImpl(dataSource);
 
       // Act
-      final result = await itemRepo.fetchItems();
+      final result = await itemRepo.getUsers();
 
       // Assert
       expect(result, isEmpty);
@@ -65,10 +65,10 @@ void main() {
       // Arrange
       final user = [UserModel(id: '1', name: 'Test User')];
       final dataSource = TestUserDataSource(user);
-      final itemRepo = ItemRepoImpl(dataSource);
+      final itemRepo = UserRepoImpl(dataSource);
 
       // Act
-      final result = await itemRepo.fetchItems();
+      final result = await itemRepo.getUsers();
 
       // Assert
       expect(result.length, equals(1));
