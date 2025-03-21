@@ -3,7 +3,7 @@ import 'package:flutter_template/features/user/data/data_sources/user_remote_dat
 import 'package:flutter_template/features/user/data/repositories/user_repo_impl.dart';
 import 'package:flutter_template/features/user/domain/repositories/user_repo.dart';
 import 'package:flutter_template/features/user/domain/usecases/get_users_usecase.dart';
-import 'package:flutter_template/features/user/ui/riverpod/user_state.dart';
+import 'package:flutter_template/features/user/ui/providers/user_state.dart';
 
 // Remote Data Source Provider
 final userRemoteDataSourceProvider = Provider<UserRemoteDataSource>(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_template/features/user/ui/riverpod/user_provider.dart';
+import 'package:flutter_template/features/user/ui/providers/user_provider.dart';
 
 class UserPage extends ConsumerWidget {
   const UserPage({super.key});
